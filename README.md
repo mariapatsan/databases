@@ -1,1 +1,2 @@
-# databases
+# Базы данных
+[Лабораторная №1](https://github.com/mariapatsan/databases/blob/main/lab1.md)
