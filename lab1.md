@@ -11,7 +11,7 @@ _Выполнила: Пацан Мария 2ПОО_
    
 ### Раздел "Instance" ("Экземпляр БД")
 1. Startup / Shutdown - запуск и остановка сервера: кнопки «Startup»/«Shutdown», журнал запуска, статус экземпляра.
-2. Server Logs - журналы сервера: по умолчанию Error Log; при включении — Slow Query Log и General Query Log.
+2. Server Logs - журналы сервера: по умолчанию Error Log; при включении - Slow Query Log и General Query Log.
 3. Options File - редактор конфигурации (my.cnf / my.ini). Сохранение по «Apply», для применения нужен перезапуск.
    
 ### Раздел "Performance" ("Производительность")
