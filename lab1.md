@@ -46,14 +46,14 @@ UPDATE `simpledb`.`users` SET `email` = 'oleg@hotmail.ru' WHERE (`id` = ‘2');
 Это позволяет регистрировать пользователя, не требуя от него личных данных, но при этом сохраняет целостность базы: каждая строка имеет уникальный идентификатор и дату создания.
 
 ``` SQL
-ИЗМЕНИТЬ ТАБЛИЦУ `simpledb`.`users` 
-ДОБАВИТЬ СТОЛБЕЦ `gender` ENUM('M', 'F') NULL ПОСЛЕ `email`,
-ДОБАВИТЬ СТОЛБЕЦ `bday` ДАТА NULL ПОСЛЕ `gender`,
-ДОБАВИТЬ СТОЛБЕЦ `postal_code` VARCHAR(10) NULL ПОСЛЕ `bday`,
-ДОБАВИТЬ СТОЛБЕЦ `rating` FLOAT NULL ПОСЛЕ `postal_code`,
-ДОБАВИТЬ СТОЛЬБЕЦ `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() ПОСЛЕ `rating`,
-ИЗМЕНИТЬ СТОЛБЕЦ `имя` `имя` VARCHAR(50) NULL,
-ИЗМЕНИТЬ СТОЛБЕЦ `email` `email` VARCHAR(45) NULL ; 
+ALTER TABLE `simpledb`.`users` 
+ADD COLUMN `gender` ENUM('M', 'F') NULL AFTER `email`,
+ADD COLUMN `bday` DATE NULL AFTER `gender`,
+ADD COLUMN `postal_code` VARCHAR(10) NULL AFTER `bday`,
+ADD COLUMN `rating` FLOAT NULL AFTER `postal_code`,
+ADD COLUMN `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() AFTER `rating`,
+CHANGE COLUMN `name` `name` VARCHAR(50) NULL ,
+CHANGE COLUMN `email` `email` VARCHAR(45) NULL ;
 ```
 
 ![1](https://i.ibb.co/wZz3bvCx/2026-09-12-21-21-18.png)
@@ -61,18 +61,19 @@ UPDATE `simpledb`.`users` SET `email` = 'oleg@hotmail.ru' WHERE (`id` = ‘2');
 ## **Задание 6** 
 С помощью внесения данных вручную:
 ``` SQL
-ОБНОВЛЕНИЕ `simpledb`.`users` ИНФОРМАЦИЯ `gender` = 'F', `bday` = '1999-03-15', `postal_code` = '10100', `rating` = '4.8' ГДЕ (`id` = '1');
-ОБНОВЛЕНИЕ `simpledb`.`users` ИНФОРМАЦИЯ `gender` = 'M', `bday` = '1997-07-22', `postal_code` = '12345', `rating` = '3.7' ГДЕ (`id` = '2');
-ОБНОВЛЕНИЕ `simpledb`.`users` ИНФОРМАЦИЯ `gender` = 'F', `bday` = '2001-11-02', `postal_code` = '54321', `rating` = '4.9' ГДЕ (`id` = '3');
+UPDATE `simpledb`.`users` SET `gender` = 'F', `bday` = '1999-03-15', `postal_code` = '10100', `rating` = '4.8' WHERE (`id` = '1');
+UPDATE `simpledb`.`users` SET `gender` = 'M', `bday` = '1997-07-22', `postal_code` = '12345', `rating` = '3.7' WHERE (`id` = '2');
+UPDATE `simpledb`.`users` SET `gender` = 'F', `bday` = '2001-11-02', `postal_code` = '54321', `rating` = '4.9' WHERE (`id` = '3');
 ```
-``` SQL 
+ 
 С помощью выполнения SQL-запросов :
-ОБНОВЛЕНИЕ `simpledb`.`users` 
-SET `пол`='М', `день рождеения`='1995-05-30', `почный_код`='190000', `рейтинг`=4.2 
-ГДЕ `id`=4;
-ОБНОВЛЕНИЕ `simpledb`.`users` 
-SET `пол`='Ж', `день рождеения`='2000-09-18', `почный_код`='630000', `рейтинг`=4.5  
-ГДЕ `id`=5; 
+``` SQL
+UPDATE `simpledb`.`users` 
+SET `gender`='M', `bday`='1995-05-30', `postal_code`='190000', `rating`=4.2 
+WHERE `id`=4;
+UPDATE `simpledb`.`users` 
+SET `gender`='F', `bday`='2000-09-18', `postal_code`='630000', `rating`=4.5 
+WHERE `id`=5;
 ```
 
 
@@ -81,16 +82,16 @@ SET `пол`='Ж', `день рождеения`='2000-09-18', `почный_к�
 ## **Задание 7** 
 ``` SQL
 /*
--- Запрос: ВЫБОР * Из simpledb.users
-ПРЕДЕЛ 0, 1000
+-- Query: SELECT * FROM simpledb.users
+LIMIT 0, 1000
 
--- Дата: 2026-09-12 19:20
+-- Date: 2026-09-12 19:20
 */
-ВСТАВИТЬ В `` (`id`,`name`,`email`,`gender`,`bday`,`postal_code`,`rating`,`created`) ЗНАЧЕНИЯ (1,'Мария','maria@mail.ru','Ж','1999-03-15','10100',4.8,'2026-09-12 16:05:50');
-ВСТАВИТЬ В `` (`id`,`name`,`email`,`gender`,`bday`,`postal_code`,`rating`,`created`) ЗНАЧЕНИЯ (2,'Олег','oleg@hotmail.ru','М','1997-07-22','12345',3.7,'2026-09-12 16:05:50');
-ВСТАВИТЬ В `` (`id`,`name`,`email`,`gender`,`bday`,`postal_code`,`rating`,`created`) ЗНАЧЕНИЯ (3,'София','sofa@mail.ru','F','2001-11-02','54321',4.9,'2026-09-12 16:05:50');
-ВСТАВИТЬ В `` (`id`,`name`,`email`,`gender`,`bday`,`postal_code`,`rating`,`created`) ЗНАЧЕНИЯ (4,'Джордж','george@gmail.com','М','1995-05-30','190000',4.2,'2026-09-12 16:05:50');
-ВСТАВИТЬ В `` (`id`,`name`,`email`,`gender`,`bday`,`postal_code`,`rating`,`created`) ЗНАЧЕНИЯ (5,'Саша','sasha@gmail.com','Ж','2000-09-18','630000',4.5,'2026-09-12 16:05:50'); 
+INSERT INTO `` (`id`,`name`,`email`,`gender`,`bday`,`postal_code`,`rating`,`created`) VALUES (1,'Maria','maria@mail.ru','F','1999-03-15','10100',4.8,'2026-09-12 16:05:50');
+INSERT INTO `` (`id`,`name`,`email`,`gender`,`bday`,`postal_code`,`rating`,`created`) VALUES (2,'Oleg','oleg@hotmail.ru','M','1997-07-22','12345',3.7,'2026-09-12 16:05:50');
+INSERT INTO `` (`id`,`name`,`email`,`gender`,`bday`,`postal_code`,`rating`,`created`) VALUES (3,'Sofia','sofa@mail.ru','F','2001-11-02','54321',4.9,'2026-09-12 16:05:50');
+INSERT INTO `` (`id`,`name`,`email`,`gender`,`bday`,`postal_code`,`rating`,`created`) VALUES (4,'George','george@gmail.com','M','1995-05-30','190000',4.2,'2026-09-12 16:05:50');
+INSERT INTO `` (`id`,`name`,`email`,`gender`,`bday`,`postal_code`,`rating`,`created`) VALUES (5,'Sasha','sasha@gmail.com','F','2000-09-18','630000',4.5,'2026-09-12 16:05:50');
 ```
 
 ## **Задание 8**
@@ -127,13 +128,13 @@ ADD CONSTRAINT `resume_users`
 
 ``` sql
 /*
--- Запрос: ВЫБЕРИТЕ * ИЗ simpledb.resume
-ПРЕДЕЛ 0, 1000
+-- Query: SELECT * FROM simpledb.resume
+LIMIT 0, 1000
 
--- Дата: 2026-09-12 19:44
+-- Date: 2026-09-12 19:44
 */
-ВСТАВИТЬ В `` (`resumeid`,`userid`,`title`,`skills`,`created`) ЗНАЧЕНИЯ (1,1,'Руководитель группы','менеджмент, Java, наставничество','2026-09-12 16:42:35');
-ВСТАВИТЬ В `` (`resumeid`,`userid`,`title`,`skills`,`created`) ЗНАЧЕНИЯ (2,3,'Аналитик данных','SQL, Python','2026-09-12 16:42:35'); 
+INSERT INTO `` (`resumeid`,`userid`,`title`,`skills`,`created`) VALUES (1,1,'Team Lead','managment, Java, mentoring','2026-09-12 16:42:35');
+INSERT INTO `` (`resumeid`,`userid`,`title`,`skills`,`created`) VALUES (2,3,'Data Analyst','SQL, Python','2026-09-12 16:42:35');
 
 
 Error: There was an error while applying the SQL script to the database.
@@ -143,7 +144,7 @@ INSERT INTO `simpledb`.`resume` (`userid`, `title`, `skills`) VALUES ('10', 'Man
 
 ERROR 1452: 1452: Cannot add or update a child row: a foreign key constraint fails (`simpledb`.`resume`, CONSTRAINT `resume_users` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
 SQL Statement:
-INSERT INTO `simpledb`.`resume` (`userid`, `title`, `skills`) VALUES ('10', 'Manager', 'HTML, communication’) 
+INSERT INTO `simpledb`.`resume` (`userid`, `title`, `skills`) VALUES ('10', 'Manager', 'HTML, communication’)
 ```
 
 Будет ли возможно добавить резюме с несуществующим userid? Каков результат? Почему так происходит? Нет, вставка невозможна. MySQL выдаёт ошибку ERROR 1452: «Cannot add or update a child row: a foreign key constraint fails». СУБД отказывается вставлять строку, потому что resume.userid ссылается на несуществующую запись в users.id.
