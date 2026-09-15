@@ -95,23 +95,23 @@ SET `пол`='Ж', `день рождеения`='2000-09-18', `почный_к�
 
 ## **Задание 8**
 ``` SQL
-СОЗДАТЬ ТАБЛИЦУ `simpledb`.`resume` (
-  `resumeid` INT НЕ NULL AUTO_INCREMENT,
-  `userid` INT НЕ НУЛЕВОЙ,
-  `title` ВАРЧАР(100) НЕ НУЛЕВОЙ,
-  `навыки` ТЕКСТ НУЛЕВОЙ,
-  `создано` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
-  ПЕРВИЧНЫЙ КЛЮЧ (`resumeid`));
+CREATE TABLE `simpledb`.`resume` (
+  `resumeid` INT NOT NULL AUTO_INCREMENT,
+  `userid` INT NOT NULL,
+  `title` VARCHAR(100) NOT NULL,
+  `skills` TEXT NULL,
+  `created` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (`resumeid`));
 
-ИЗМЕНИТЬ ТАБЛИЦУ `simpledb`.`резюме` 
-ДОБАВИТЬ ИНДЕКС `resume_users_idx` (`userid` ASC) ВИДИМИЙ;
+ALTER TABLE `simpledb`.`resume` 
+ADD INDEX `resume_users_idx` (`userid` ASC) VISIBLE;
 ;
-ИЗМЕНИТЬ ТАБЛИЦУ `simpledb`.`резюме` 
-ДОБАВИТЬ ОГРАНИЧИЕ `resume_users`
--- Дата: 2026-09-12 19:44
-  ССЫЛКИ `simpledb`.`users` (`id`)
-  ПРИ УДАЛЕНИИ КАСКАДА
-  В КАСКАДЕ ОБНОВЛЕНИЙ; 
+ALTER TABLE `simpledb`.`resume` 
+ADD CONSTRAINT `resume_users`
+  FOREIGN KEY (`userid`)
+  REFERENCES `simpledb`.`users` (`id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
 ```
 
 Внешний ключ resume_users связывает поле resume.userid с полем users.id. Выбраны действия ON DELETE CASCADE и ON UPDATE CASCADE.
