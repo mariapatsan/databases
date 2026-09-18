@@ -112,7 +112,7 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 ```
-
+![1](https://i.ibb.co/k2QBJdqS/firstmodel.png)
 
 
 
@@ -286,7 +286,7 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 ```
-
+![2](https://i.ibb.co/mrrbFqTD/shops-model.png)
 
 
 ## **Задание 3** 
