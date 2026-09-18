@@ -294,3 +294,68 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 ## **Задание 4** 
+Добавление данных:
+``` sql
+INSERT INTO `users` (`fio`,`login`,`password`,`e_mail`,`type`) VALUES
+('Иванов Иван','ivanov','pass1','ivanov@mail.ru','client'),
+('Петрова Анна','petrova','pass2','petrova@gmail.com','client'),
+('Сидоров Пётр','sidorov','pass3','sidorov@hotmail.ru','admin');
+
+INSERT INTO `mydb`.`settings` (`host`, `db`, `user`, `password`) VALUES 
+('localhost', 'mydb', 'root', '12345');
+
+INSERT INTO `shops` (`name`,`address`,`tel`,`site`,`email`) VALUES
+('Перекресток','ул. Ленина, 10','+7-900-111-22-33','perek.ru','perek@mail.ru'),
+('Лента','пр. Мира, 25’,'+7-900-444-55-66','lenta.ru','lenta@mail.ru');
+
+INSERT INTO `product_type` (`name`) VALUES
+('Сыр'), ('Молоко'), (‘Колбаса');
+
+INSERT INTO `products` (`shop_id`,`type_id`,`brand`,`model`,`data`,`img`,`price`,`warranity`) VALUES
+(1, 1, 'Простоквашино', 'Сыр Российский', '200 г, 45%', '/img/cheese.jpg', '249', '30 дней'),
+(1, 2, 'Домик в деревне', 'Молоко 3,2%', '1 л', '/img/milk.jpg', '89', '7 дней'),
+(2, 3, 'Мясная история', 'Колбаса Докторская', '500 г', '/img/sausage.jpg', '299', '14 дней’);
+
+INSERT INTO `orders` (`shop_id`,`product_id`,`fio`,`date`,`quantity`,`tel`,`confirm`) VALUES
+(1, 4, 1, '2026-09-15', 1, '+7-900-111-22-11', 1),
+(1, 5, 2, '2026-09-15', 2, '+7-900-111-22-22', 0),
+(2, 6, 3, '2026-09-16', 1, '+7-900-111-22-33', 1);
+
+INSERT INTO `deliveries` (`order_id`,`fio`,`address`,`time`,`date`,`confirm`) VALUES
+(5, 1, 'ул. Пушкина, 5', '10:00-12:00', '2026-09-16', 0),
+(6, 2, 'ул. Гоголя, 7', '14:00-16:00', '2026-09-16', 0),
+(7, 3, 'ул. Чехова, 12', '18:00-20:00', '2026-09-17', 0);
+```
+
+Добавление атрибутов:
+``` sql
+ALTER TABLE `users`        ADD COLUMN `phone` VARCHAR(20) NULL;
+ALTER TABLE `settings`     ADD COLUMN `port` INT NULL;
+ALTER TABLE `shops`        ADD COLUMN `rating` FLOAT NULL;
+ALTER TABLE `product_type` ADD COLUMN `description` VARCHAR(255) NULL;
+ALTER TABLE `products`     ADD COLUMN `stock` INT NULL;
+ALTER TABLE `orders`       ADD COLUMN `comment` VARCHAR(255) NULL;
+ALTER TABLE `deliveries`   ADD COLUMN `courier` VARCHAR(100) NULL;
+```
+
+Удаление данных:
+``` sql
+ALTER TABLE `users`        ADD COLUMN `phone` VARCHAR(20) NULL;
+ALTER TABLE `settings`     ADD COLUMN `port` INT NULL;
+ALTER TABLE `shops`        ADD COLUMN `rating` FLOAT NULL;
+ALTER TABLE `product_type` ADD COLUMN `description` VARCHAR(255) NULL;
+ALTER TABLE `products`     ADD COLUMN `stock` INT NULL;
+ALTER TABLE `orders`       ADD COLUMN `comment` VARCHAR(255) NULL;
+ALTER TABLE `deliveries`   ADD COLUMN `courier` VARCHAR(100) NULL;
+
+
+DELETE FROM `shops` WHERE `idshops` = 1;
+21:37:55	DELETE FROM `shops` WHERE `idshops` = 1	Error Code: 1451. Cannot delete or update a parent row: a foreign key constraint fails (`mydb`.`orders`, CONSTRAINT `orders_to_shops` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`idshops`))	0.0026 sec
+
+
+DELETE FROM `users` WHERE `idusers` = 1;
+21:38:50	DELETE FROM `users` WHERE `idusers` = 1	Error Code: 1451. Cannot delete or update a parent row: a foreign key constraint fails (`mydb`.`orders`, CONSTRAINT `orders_to_users` FOREIGN KEY (`fio`) REFERENCES `users` (`idusers`))	0.0023 sec
+```
+Внешние ключи обеспечивают ссылочную целостность: пока существуют дочерние записи, удалить родительскую невозможно.
+
+![4](https://i.ibb.co/Zzkh5T7b/2026-09-18-21-39-27.png)
