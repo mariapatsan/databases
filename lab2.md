@@ -290,7 +290,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 ## **Задание 3** 
-![3]([https://ibb.co/jZD55t6J](https://i.ibb.co/mF4BBpDN/2026-09-18-20-12-46.png))
+![3](https://i.ibb.co/mF4BBpDN/2026-09-18-20-12-46.png)
 
 
 ## **Задание 4** 
